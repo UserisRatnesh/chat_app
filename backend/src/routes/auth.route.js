@@ -4,6 +4,7 @@ import {
   login,
   logout,
   updateProfile,
+  checkAuth,
 } from "../controller/auth.controller.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
 
@@ -15,7 +16,9 @@ router.post("/login", login);
 
 router.post("/logout", logout);
 
-// NOTE: Update profile picture
 router.put("/update-profile", protectRoute, updateProfile);
+
+// We will call this when we refresh the page
+router.get("/check", protectRoute, checkAuth);
 
 export default router;
