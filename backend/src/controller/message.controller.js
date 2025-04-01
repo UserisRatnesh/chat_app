@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
+import cloudinary from "cloudinary";
 
 export const getUsersForSidebar = async (req, res) => {
   try {
@@ -63,7 +64,7 @@ export const sendMessage = async (req, res) => {
 
     return res.status(200).json(newMessage);
   } catch (error) {
-    console.log("Error in sendMessage controller : ", error.messages);
+    console.log("Error in sendMessage controller : ", error.message);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
