@@ -58,8 +58,10 @@ export const useChatStore = create((set, get) => ({
 
     const socket = useAuthStore.getState().socket;
 
-    // TODO: Optimize this
     socket.on("newMessage", (newMessage) => {
+      if (newMessage.senderId !== selectedUser._id) {
+        return;
+      }
       set({
         // Keep previous messages and add new message at last
         messages: [...get().messages, newMessage],
@@ -72,7 +74,6 @@ export const useChatStore = create((set, get) => ({
     socket.off("newMessage");
   },
 
-  // TODO: Optimize it later
   setSelectedUser: async (user) => {
     set({ selectedUser: user });
   },
